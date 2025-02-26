@@ -10,7 +10,7 @@
 // -----------  ----------- -----------------------
 // 26-FEB-2025  [A.Reinert] Program start
 // 26-FEB-2025  [A.Reinert] Updates to watchdog and debounce time
-// 26-FEB-2025  [A.Reinert] Program Complete
+// 26-FEB-2025  [A.Reinert] Line notes added and Program Complete 
 // *************************************************************************
 
 // Include Files
@@ -66,7 +66,7 @@ void setup() // Setup
      timerAlarmWrite(timer0, 1000, true);  // 1ms period
      timerAlarmEnable(timer0);  // Enable timer
 
-     esp_task_wdt_init(10, true);  // Initialize the watchdog timer, setting timeout to 10 seconds
+     esp_task_wdt_init(10, true);  // Initialize the watchdog timer,timeout = 10 sec
      esp_task_wdt_add(NULL);       // Add the current task to the watchdog timer
 }
 
@@ -81,9 +81,9 @@ void loop() // Main program
      unsigned long elapsedTime = currentMillis / 1000; // Convert milliseconds to seconds
 
      // Print the elapsed time to the terminal
-     Serial.print("Elapsed time: ");
-     Serial.print(elapsedTime);
-     Serial.println(" seconds");
+     Serial.print("Elapsed time: ");   // Print the message
+     Serial.print(elapsedTime);       // Print the elapsed time
+     Serial.println(" seconds");    // Print a newline character
 
      if(flagTimer0) // Timer expired
      {
