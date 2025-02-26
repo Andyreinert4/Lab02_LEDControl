@@ -11,6 +11,7 @@
 // 26-FEB-2025  [A.Reinert] Program start
 // 26-FEB-2025  [A.Reinert] Updates to watchdog and debounce time
 // 26-FEB-2025  [A.Reinert] Line notes added and Program Complete 
+// 26-FEB-2025  [A.Reinert] Final Commit
 // *************************************************************************
 
 // Include Files
@@ -99,7 +100,7 @@ void loop() // Main program
      }
 
      // Blink the LEDBUILTIN at a defined interval
-     if (currentMillis - previousMillis >= interval) // Compare the time difference to the interval
+     if (currentMillis - previousMillis >= interval) // Compare time difference to interval
      {
      previousMillis = currentMillis;     // Save the last time the LED was updated
      
@@ -114,9 +115,9 @@ void loop() // Main program
      }
 
      // watchdog timer
-     if (currentMillis - previousWdtMillis >= wdtinterval) 
+     if (currentMillis - previousWdtMillis >= wdtinterval) // Compare time difference to interval
      {
-          previousWdtMillis = currentMillis;
+          previousWdtMillis = currentMillis; // Save the last time the LED was updated
           Serial.println("Working...");    // Print a message every second
           esp_task_wdt_reset();       // Reset (feed) the watchdog timer
      }
