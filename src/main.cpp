@@ -9,7 +9,8 @@
 // When         Who         Description of change
 // -----------  ----------- -----------------------
 // 26-FEB-2025  [A.Reinert] Program start
-//
+// 26-FEB-2025  [A.Reinert] Updates to watchdog and debounce time
+// 26-FEB-2025  [A.Reinert] Program Complete
 // *************************************************************************
 
 // Include Files
@@ -26,11 +27,13 @@ const uint8_t LedBuiltin = 2; //   ESP32-CAM LED
 bool ledState = false;  // LED state
 
 uint8_t countpush = 0;
-const uint16_t debounceTime = 5; /// 10ms debounce time
+const uint16_t debounceTime = 5; /// 5ms debounce time
 unsigned long debouncePrevious = 5; // millis()
 
 unsigned long previousMillis = 0;  // will store last time LED was updated
+unsigned long previousWdtMillis = 0; // will store last time LED was updated
 const long interval = 1000; // interval at which to blink (milliseconds)
+const long wdtinterval = 1000; // interval at which to blink (milliseconds)
 
 bool logicLevel = HIGH;  // Button logic level
 Debounce myButton(BUTTON, logicLevel);  // Debounce object
@@ -111,9 +114,9 @@ void loop() // Main program
      }
 
      // watchdog timer
-     if (currentMillis - previousMillis >= interval) 
+     if (currentMillis - previousWdtMillis >= wdtinterval) 
      {
-          previousMillis = currentMillis;
+          previousWdtMillis = currentMillis;
           Serial.println("Working...");    // Print a message every second
           esp_task_wdt_reset();       // Reset (feed) the watchdog timer
      }
